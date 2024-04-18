@@ -1,1 +1,24 @@
-console.log("Ciao!");
+import express from "express"
+import { PrismaClient } from '@prisma/client'
+import { apiRouter } from "./api/index.js";
+import { dbClient } from "./db.js";
+
+const server = express()
+
+const PORT = process.env.PORT || 3030;
+
+
+
+server.get("/", (req, res) => {
+  res.send("Hello World!")
+})
+
+server.use("/api", apiRouter)
+
+server.listen(PORT, () => {
+  console.log(`Server started at port http://localhost:${PORT}`);
+})
+
+//Query
+// const users = await prisma.user.findUnique({where: {username: "fraco92", email: "fraco92@gmail.com"}})
+// console.log(users);

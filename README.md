@@ -2,9 +2,9 @@
 
 ## TO DO:
 
-- [ ] Auth
+- [x] Database Setup
 - [ ] Event list
-- [ ] Database Setup
+- [ ] Auth
 - [ ] Request caching
 - [ ] Deploy
 
