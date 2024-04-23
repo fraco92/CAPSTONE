@@ -2,11 +2,13 @@ import express from "express"
 import { PrismaClient } from '@prisma/client'
 import { apiRouter } from "./api/index.js";
 import { dbClient } from "./db.js";
+import cors from "cors"
 
 const server = express()
 
 const PORT = process.env.PORT || 3030;
 
+server.use(cors())
 
 
 server.get("/", (req, res) => {
