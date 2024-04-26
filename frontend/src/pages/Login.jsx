@@ -13,7 +13,6 @@ export const Login = (props) => {
         setEmailError('')
         setPasswordError('')
 
-        // Check if the user has entered both fields correctly
         if ('' === email) {
             setEmailError('Inserisci la tua email')
             return
@@ -38,39 +37,57 @@ export const Login = (props) => {
     }
 
     return (
-        <div className={'mainContainer'}>
-            <div className={'titleContainer'}>
+        <div
+            className={
+                'mainContainer flex flex-col justify-center align-middle'
+            }
+        >
+            <div
+                className={
+                    'titleContaine flex flex-col justify-center align-middle text-[54px] font-bold'
+                }
+            >
                 <div>Login</div>
             </div>
             <br />
-            <div className={'inputContainer'}>
+            <div className={'inputContainer flex flex-col justify-center'}>
                 <input
                     value={email}
                     placeholder="Enter your email here"
                     onChange={(ev) => setEmail(ev.target.value)}
-                    className={'inputBox'}
+                    className={
+                        'inputBox h-[38px] w-[280px] rounded-[8px] border ps-[8px] text-lg'
+                    }
                 />
-                <label className="errorLabel">{emailError}</label>
+                <label className="errorLabel text-[12px] text-red-600">
+                    {emailError}
+                </label>
             </div>
             <br />
-            <div className={'inputContainer'}>
+            <div className={'inputContainer flex flex-col justify-center'}>
                 <input
                     value={password}
+                    type="password"
                     placeholder="Enter your password here"
                     onChange={(ev) => setPassword(ev.target.value)}
-                    className={'inputBox'}
+                    className={
+                        'inputBox h-[38px] w-[280px] rounded-[8px] border ps-[8px] text-lg'
+                    }
                 />
-                <label className="errorLabel">{passwordError}</label>
+                <label className="errorLabel text-[12px] text-red-600">
+                    {passwordError}
+                </label>
             </div>
             <br />
-            <div className={'inputContainer'}>
-                <input
-                    className={'inputButton'}
-                    type="button"
-                    onClick={onButtonClick}
-                    value={'Log in'}
-                />
-            </div>
+
+            <input
+                className={
+                    'inputButton mx-[90px] cursor-pointer rounded-[8px] border-0 bg-black py-[10px] font-medium'
+                }
+                type="button"
+                onClick={onButtonClick}
+                value={'Log in'}
+            />
         </div>
     )
 }
