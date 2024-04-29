@@ -6,17 +6,28 @@ export const EventCard = ({ event }) => {
     const eventDateTime = new Date(event.dates.start.dateTime).toLocaleString()
 
     return (
-        <div className="w-60">
-            {/* Titolo dell'evento */}
-            <h2>{eventName}</h2>
-            {/* Cover immagine */}
-            <img src={eventImage} alt={eventName} />
-            {/* Nome dell'artista */}
-            <p>Artista: {artistName}</p>
-            {/* Luogo dell'evento */}
-            <p>Luogo: {venueName}</p>
-            {/* Orario dell'evento */}
-            <p>Orario: {eventDateTime}</p>
-        </div>
+        <>
+            <div
+                onClick={() => navigateTo(`/details/${event.id}`)}
+                className="pointer bg-base-100 shadow- flex w-96 w-[280px] flex-col justify-center align-middle "
+            >
+                <img
+                    className="h-[200px] object-cover"
+                    src={eventImage}
+                    alt={eventImage}
+                />
+
+                <div className="card-body flex items-start p-4">
+                    <h2 className="card-title">{eventName}</h2>
+                    <p>{artistName}</p>
+                    {/* <p>Luogo: {venueName}</p> */}
+                    {/* <p>Orario: {eventDateTime}</p> */}
+                    <div className="card-actions justify-end">
+                        <button className="btn btn-primary">Dettagli</button>
+                        <button className="btn btn-primary">Ticket</button>
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }

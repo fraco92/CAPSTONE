@@ -3,6 +3,7 @@ import './App.css'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { Discovery } from './pages/Discovery'
+import { EventDetail } from './pages/EventDetail'
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/discovery" element={<Discovery />} />
+                    <Route path="/details" element={<EventDetail />} />
                 </Routes>
             </BrowserRouter>
         </div>

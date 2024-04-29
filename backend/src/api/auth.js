@@ -1,6 +1,6 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
-import { dbClient } from "../db";
+import { dbClient } from "../db.js";
 import bcrypt from "bcrypt"
 import { Sign } from "crypto";
 

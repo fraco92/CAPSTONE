@@ -17,7 +17,7 @@ export const Discovery = () => {
 
     return (
         <>
-            <div className="flex flex-wrap gap-10">
+            <div className="mx-8 mb-16 grid grid-flow-row gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {events.map((event, index) => (
                     <EventCard key={index} event={event} />
                 ))}
