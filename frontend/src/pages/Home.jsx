@@ -9,7 +9,7 @@ export const Home = (props) => {
             </div>
             <div>This is the home page.</div>
 
-            <Link className="bg-neutral-50" to="/login">
+            <Link type="button" className="bg-neutral-50" to="/login">
                 Login
             </Link>
         </div>

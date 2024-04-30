@@ -33,7 +33,20 @@ export const Login = (props) => {
             return
         }
 
-        // Authentication calls will be made here...
+        checkAccountExists((accountExists) => {
+            // If yes, log in
+            if (accountExists) logIn()
+            // Else, ask user if they want to create a new account and if yes, then log in
+            else if (
+                window.confirm(
+                    'An account does not exist with this email address: ' +
+                        email +
+                        '. Do you want to create a new account?'
+                )
+            ) {
+                logIn()
+            }
+        })
     }
 
     return (
