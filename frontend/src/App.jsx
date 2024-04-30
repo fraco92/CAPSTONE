@@ -4,19 +4,21 @@ import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { Discovery } from './pages/Discovery'
 import { EventDetail } from './pages/EventDetail'
-import { Navbar } from './components/Navbar'
+import { NavbarMenu } from './components/NavbarMenu'
+import { Footer } from './components/Footer'
 
 function App() {
     return (
         <div className="App">
             <BrowserRouter>
-                <Navbar />
+                <NavbarMenu />
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
                     <Route path="/discovery" element={<Discovery />} />
+                    <Route path="/login" element={<Login />} />
                     <Route path="/details" element={<EventDetail />} />
                 </Routes>
+                <Footer />
             </BrowserRouter>
         </div>
     )

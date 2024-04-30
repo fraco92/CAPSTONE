@@ -1,9 +1,9 @@
-import { useContext } from 'react'
 import { useParams } from 'react-router-dom'
+import { useEventStore } from '../stores/EventStore'
 
 export const EventDetail = () => {
+    const eventStore = useEventStore()
     const { id } = useParams()
-    const { event } = useContext()
 
     const eventName = event.name
     const eventImage = event.images[0].url

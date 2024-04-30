@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react'
 import { EventCard } from '../components/EventCard'
 import { useSearchParams } from 'react-router-dom'
+import { useEventStore } from '../stores/EventStore'
 
 export const Discovery = () => {
     const [events, setEvents] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
+    const { setEvents: setEventStoreEvents } = useEventStore()
+    useEffect(() => {
+        setEventStoreEvents(events)
+    }, [events, setEventStoreEvents])
 
     useEffect(() => {
         fetch(
