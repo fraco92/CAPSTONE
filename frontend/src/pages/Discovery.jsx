@@ -6,10 +6,11 @@ import { useEventStore } from '../stores/EventStore'
 export const Discovery = () => {
     const [events, setEvents] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
-    const { setEvents: setEventStoreEvents } = useEventStore()
+    const eventStore = useEventStore()
     useEffect(() => {
-        setEventStoreEvents(events)
-    }, [events, setEventStoreEvents])
+        console.log('questo: ', events)
+        eventStore.setEvents(events)
+    }, [events])
 
     useEffect(() => {
         fetch(
@@ -22,7 +23,12 @@ export const Discovery = () => {
 
     return (
         <>
-            <div className="mx-8 mb-16 grid grid-flow-row gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div>
+                <h1 className="mt-10 text-[24pt] font-bold text-black">
+                    I prossimi eventi
+                </h1>
+            </div>
+            <div className="mt-10 flex flex-row flex-wrap justify-center gap-4 pb-14">
                 {events.map((event, index) => (
                     <EventCard key={index} event={event} />
                 ))}
@@ -30,3 +36,5 @@ export const Discovery = () => {
         </>
     )
 }
+
+// mx-8 mb-16 grid grid-flow-row gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
