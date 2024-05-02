@@ -9,6 +9,10 @@ export const Login = (props) => {
 
     const navigate = useNavigate()
 
+    const navigateToSignup = () => {
+        navigate('/signup')
+    }
+
     const onButtonClick = () => {
         setEmailError('')
         setPasswordError('')
@@ -49,10 +53,42 @@ export const Login = (props) => {
         })
     }
 
+    const checkAccountExists = (callback) => {
+        fetch('http://localhost:3030/api/auth/check', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email }),
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                callback(response.userExists)
+            })
+    }
+
+    const logIn = () => {
+        fetch('http://localhost:3030/api/auth', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email, password: password }),
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                if (response.token) {
+                    authStore.setToken({ token: response.token, email })
+                } else {
+                    window.alert('Email o password errati')
+                }
+            })
+    }
+
     return (
         <div
             className={
-                'mainContainer flex flex-col justify-center align-middle'
+                'mainContainer mt-20 flex flex-col items-center align-middle'
             }
         >
             <div
@@ -62,45 +98,54 @@ export const Login = (props) => {
             >
                 <div>Login</div>
             </div>
-            <br />
-            <div className={'inputContainer flex flex-col justify-center'}>
+
+            <div className={'inputContainer flex flex-col justify-center pt-7'}>
                 <input
                     value={email}
                     placeholder="Enter your email here"
                     onChange={(ev) => setEmail(ev.target.value)}
                     className={
-                        'inputBox h-[38px] w-[280px] rounded-[8px] border ps-[8px] text-lg'
+                        'inputBox h-[38px] w-[280px] rounded-[8px] border border-black bg-white ps-[8px] text-lg'
                     }
                 />
                 <label className="errorLabel text-[12px] text-red-600">
                     {emailError}
                 </label>
             </div>
-            <br />
-            <div className={'inputContainer flex flex-col justify-center'}>
+
+            <div className={'inputContainer flex flex-col justify-center pt-7'}>
                 <input
                     value={password}
                     type="password"
                     placeholder="Enter your password here"
                     onChange={(ev) => setPassword(ev.target.value)}
                     className={
-                        'inputBox h-[38px] w-[280px] rounded-[8px] border ps-[8px] text-lg'
+                        'inputBox h-[38px] w-[280px] rounded-[8px] border border-black bg-white ps-[8px] text-lg'
                     }
                 />
                 <label className="errorLabel text-[12px] text-red-600">
                     {passwordError}
                 </label>
             </div>
-            <br />
 
             <input
                 className={
-                    'inputButton mx-[90px] cursor-pointer rounded-[8px] border-0 bg-black py-[10px] font-medium'
+                    'inputButton mx-[90px] mt-7 cursor-pointer rounded-full border-0 bg-black px-4 py-[10px] font-medium text-white'
                 }
                 type="button"
                 onClick={onButtonClick}
                 value={'Log in'}
             />
+            <div className="mt-10">
+                <span>Non sei ancora iscritto?</span>
+                <a
+                    onClick={navigateToSignup}
+                    className="ps-2 text-red-500 hover:text-red-600"
+                    href=""
+                >
+                    Iscriviti
+                </a>
+            </div>
         </div>
     )
 }

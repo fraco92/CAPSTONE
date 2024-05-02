@@ -5,8 +5,14 @@ export const EventCard = ({ event }) => {
     const eventImage = event.images[9].url
     const artistName = event._embedded.attractions[0].name
     const venueName = event._embedded.venues[0].name
-    const eventDateTime = new Date(event.dates.start.dateTime).toLocaleString()
-    const navigateTo = useNavigate()
+    const cityName = event._embedded.venues[0].city.name
+    const eventDate = event.dates.start.localDate
+    const eventDateFormatted = new Date(eventDate).toLocaleDateString('it-IT', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+    })
+    const eventTime = event.dates.start.localTime.substring(0, 5)
 
     return (
         <>
@@ -21,17 +27,17 @@ export const EventCard = ({ event }) => {
                         alt={eventImage}
                     />
 
-                    <div className="flex items-start p-4">
-                        <h2 className="">{eventName}</h2>
-                        <p>{artistName}</p>
-                        {/* <p>Luogo: {venueName}</p> */}
-                        {/* <p>Orario: {eventDateTime}</p> */}
-                        <div className="justify-end">
-                            <button className="btn btn-primary">
-                                Dettagli
-                            </button>
-                            <button className="btn btn-primary">Ticket</button>
-                        </div>
+                    <div className="flex flex-col items-start pt-2">
+                        <h2 className="overflow-hidden truncate text-ellipsis text-[10pt] font-bold">
+                            {eventName}
+                        </h2>
+                        <p className="text-[10pt] font-medium text-red-500">
+                            {artistName}
+                        </p>
+                        <p className="overflow-hidden truncate text-ellipsis text-[10pt]">
+                            {venueName}, {cityName}
+                        </p>
+                        <p className="text-[10pt]">{eventDateFormatted}</p>
                     </div>
                 </div>
             </div>

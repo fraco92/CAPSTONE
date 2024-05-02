@@ -2,12 +2,23 @@ import React from 'react'
 import { Navbar } from 'flowbite-react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-export const NavbarMenu = () => {
+export const NavbarMenu = (props) => {
     const location = useLocation()
-    const navigateTo = useNavigate()
+
+    const { loggedIn, email } = props
+    const navigate = useNavigate()
 
     // Verifica se la posizione corrente è "/login"
     const isLoginPage = location.pathname === '/login'
+
+    const onButtonClick = () => {
+        if (loggedIn) {
+            localStorage.removeItem('user')
+            props.setLoggedIn(false)
+        } else {
+            navigate('/login')
+        }
+    }
 
     return (
         <>
@@ -40,6 +51,14 @@ export const NavbarMenu = () => {
                     >
                         Supporto
                     </Link>
+                    {!isLoginPage && (
+                        <input
+                            className="cursor-pointer text-black hover:text-red-500"
+                            type="button"
+                            onClick={onButtonClick}
+                            value={loggedIn ? 'Log out' : 'Log in'}
+                        />
+                    )}
                 </Navbar.Collapse>
             </Navbar>
         </>
