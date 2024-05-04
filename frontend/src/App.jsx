@@ -9,6 +9,7 @@ import { Footer } from './components/Footer'
 import { useEffect, useState } from 'react'
 import { SignUp } from './pages/SignUp'
 import { useAuthStore } from './stores/AuthStore'
+import { Support } from './pages/Support'
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(false)
@@ -46,6 +47,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/details/:id" element={<EventDetail />} />
+                    <Route path="/support" element={<Support />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>

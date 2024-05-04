@@ -10,9 +10,6 @@ export const EventDetail = () => {
         eventStore.events.find((event) => event.id === id)
     )
 
-    console.log(eventStore)
-    console.log(id)
-
     const eventName = event.name
     const eventImage = event.images[9].url
     const artistName = event._embedded.attractions[0].name

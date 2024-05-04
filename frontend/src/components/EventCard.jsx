@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
 export const EventCard = ({ event }) => {
+    const navigateTo = useNavigate()
     const eventName = event.name
     const eventImage = event.images[9].url
     const artistName = event._embedded.attractions[0].name
