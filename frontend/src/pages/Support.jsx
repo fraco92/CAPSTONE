@@ -43,45 +43,79 @@ export const Support = () => {
             )
     }
     return (
-        <form
-            className="flex flex-col items-center"
-            onSubmit={sendEmail}
-            ref={form}
+        <div
+            className={
+                'mainContainer mt-20 flex flex-col items-center align-middle'
+            }
         >
-            <div className={'inputContainer flex flex-col justify-center pt-7'}>
+            <div
+                className={
+                    'titleContaine flex flex-col justify-center align-middle text-[54px] font-bold'
+                }
+            >
+                <div>Supporto</div>
+                <p className="mt-4 p-4 text-[18px] font-normal">
+                    Inviaci una mail se hai un problema, una richiesta o un
+                    consiglio
+                    <ion-icon name="heart-outline"></ion-icon>
+                    .
+                    <br /> Ti risponderemo al più presto! :)
+                </p>
+            </div>
+            <form
+                className="flex flex-col items-center"
+                onSubmit={sendEmail}
+                ref={form}
+            >
+                <div
+                    className={
+                        'inputContainer flex flex-col justify-center pt-7'
+                    }
+                >
+                    <input
+                        className="inputBox h-[38px] w-[280px] rounded-[8px] border border-black bg-white ps-[8px] text-lg"
+                        type="text"
+                        name="user_name"
+                        placeholder="Nome"
+                        required
+                    />
+                </div>
+                <div
+                    className={
+                        'inputContainer flex flex-col justify-center pt-7'
+                    }
+                >
+                    <input
+                        className="inputBox h-[38px] w-[280px] rounded-[8px] border border-black bg-white ps-[8px] text-lg"
+                        type="email"
+                        name="user_email"
+                        placeholder="Email"
+                        required
+                    />
+                </div>
+                <div
+                    className={
+                        'inputContainer flex flex-col justify-center pt-7'
+                    }
+                >
+                    <Textarea
+                        className="h-[120px] w-[280px] rounded-[8px] border border-black bg-white ps-[8px] text-lg focus:border-black"
+                        id="comment"
+                        placeholder="Inserisci il tuo messaggio"
+                        required
+                        rows={4}
+                        name="message"
+                    />
+                </div>
                 <input
-                    className="inputBox h-[38px] w-[280px] rounded-[8px] border border-black bg-white ps-[8px] text-lg"
-                    type="text"
-                    name="user_name"
-                    placeholder="Nome"
+                    className="inputButton mx-[90px] mt-7 cursor-pointer rounded-full border-0 bg-black px-4 py-[10px] font-medium text-white"
+                    type="submit"
+                    value="Send"
+                    disabled={isSubmitting}
+                    onClick={sendEmail}
                 />
-            </div>
-            <div className={'inputContainer flex flex-col justify-center pt-7'}>
-                <input
-                    className="inputBox h-[38px] w-[280px] rounded-[8px] border border-black bg-white ps-[8px] text-lg"
-                    type="email"
-                    name="user_email"
-                    placeholder="Email"
-                />
-            </div>
-            <div className={'inputContainer flex flex-col justify-center pt-7'}>
-                <Textarea
-                    className="h-[38px] w-[280px] rounded-[8px] border border-black bg-white ps-[8px] text-lg focus:border-black"
-                    id="comment"
-                    placeholder="Inserisci il tuo messaggio"
-                    required
-                    rows={4}
-                    name="message"
-                />
-            </div>
-            <input
-                className="inputButton mx-[90px] mt-7 cursor-pointer rounded-full border-0 bg-black px-4 py-[10px] font-medium text-white"
-                type="submit"
-                value="Send"
-                disabled={isSubmitting}
-                onClick={sendEmail}
-            />
-            {stateMessage && <p>{stateMessage}</p>}
-        </form>
+                {stateMessage && <p>{stateMessage}</p>}
+            </form>
+        </div>
     )
 }

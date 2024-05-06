@@ -1,10 +1,11 @@
 import React from 'react'
 import { Navbar } from 'flowbite-react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../stores/AuthStore'
 
 export const NavbarMenu = (props) => {
     const location = useLocation()
-
+    const authStore = useAuthStore()
     const { loggedIn, email } = props
     const navigate = useNavigate()
 
@@ -51,7 +52,7 @@ export const NavbarMenu = (props) => {
                     >
                         Supporto
                     </Link>
-                    {!isLoginPage && (
+                    {!isLoginPage && authStore.isLoggedIn() && (
                         <input
                             className="cursor-pointer text-black hover:text-red-500"
                             type="button"

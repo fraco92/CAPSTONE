@@ -4,6 +4,7 @@ import { useState } from 'react'
 export const SearchBar = () => {
     const eventStore = useEventStore()
 
+    const [name, setName] = useState('')
     const [city, setCity] = useState('')
 
     const handlerInput = (e) => {
@@ -25,6 +26,7 @@ export const SearchBar = () => {
                     className="inputBox h-[38px] w-[280px] rounded-[8px] border border-black bg-white ps-[8px] text-lg"
                     onChange={handlerInput}
                     type="text"
+                    value={name}
                     placeholder="Cerca un evento/artista"
                 />
             </div>
@@ -34,6 +36,7 @@ export const SearchBar = () => {
                     className="inputBox h-[38px] w-[280px] rounded-[8px] border border-black bg-white ps-[8px] text-lg"
                     onChange={handlerInput}
                     type="text"
+                    value={city}
                     placeholder="Cerca per città"
                 />
             </div>

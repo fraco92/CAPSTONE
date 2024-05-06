@@ -14,8 +14,8 @@ export const SignUp = (props) => {
     const navigate = useNavigate()
     const authStore = useAuthStore()
 
-    const navigateToSignup = () => {
-        navigate('/signup')
+    const navigateToLogin = () => {
+        navigate('/login')
     }
 
     const onButtonClick = () => {
@@ -220,7 +220,7 @@ export const SignUp = (props) => {
             <div className="mt-10">
                 <span>Sei gia iscritto?</span>
                 <a
-                    onClick={navigateToSignup}
+                    onClick={navigateToLogin}
                     className="ps-2 text-red-500 hover:text-red-600"
                     href=""
                 >

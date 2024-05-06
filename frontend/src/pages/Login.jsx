@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../stores/AuthStore'
 
 export const Login = (props) => {
     const [email, setEmail] = useState('')
@@ -8,6 +9,7 @@ export const Login = (props) => {
     const [passwordError, setPasswordError] = useState('')
 
     const navigate = useNavigate()
+    const authStore = useAuthStore()
 
     const navigateToSignup = () => {
         navigate('/signup')
@@ -79,6 +81,7 @@ export const Login = (props) => {
             .then((response) => {
                 if (response.token) {
                     authStore.setToken({ token: response.token, email })
+                    navigate('/discovery')
                 } else {
                     window.alert('Email o password errati')
                 }
@@ -102,6 +105,7 @@ export const Login = (props) => {
             <div className={'inputContainer flex flex-col justify-center pt-7'}>
                 <input
                     value={email}
+                    name="email"
                     placeholder="Enter your email here"
                     onChange={(ev) => setEmail(ev.target.value)}
                     className={
@@ -116,6 +120,7 @@ export const Login = (props) => {
             <div className={'inputContainer flex flex-col justify-center pt-7'}>
                 <input
                     value={password}
+                    name="password"
                     type="password"
                     placeholder="Enter your password here"
                     onChange={(ev) => setPassword(ev.target.value)}

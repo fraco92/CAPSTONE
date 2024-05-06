@@ -42,8 +42,6 @@ authRouter.post("/signup", async (req, res) => {
 authRouter.post("/", async (req, res) => {
 const { email, password } = req.body
 
-console.log("Questa pw:", password)
-
 const user = await dbClient.user.findUnique({where:{email}})
 
 
@@ -70,10 +68,14 @@ if (user) {
 // verify endpoint (verifica la validità del token JWT fornito)
 
 authRouter.post("/verify", async (req, res) => {
+
   const tokenHeaderKey = 'jwt-token'
-  const { token } = req.headers[tokenHeaderKey]
+  const token = req.get(tokenHeaderKey)
+  if(!token) return res.status(401).json({status: 'invalid auth', message: "Token non fornito"})
+
   try {
     const decoded = jwt.verify(token, JWTSecretKey)
+    console.log(decoded)
     res.status(200).json({status: 'logged in', message: "Token valido", decoded})
   } catch (err) {
     res.status(401).json({status: 'invalid auth', message: "Token non valido"})

@@ -24,7 +24,7 @@ export const Discovery = () => {
             if (events.status === 'success') setEvents(events.data)
             else console.error('Error fetching events', events)
         })
-    }, [currentPage, itemsPerPage, searchParams.get('page'), city])
+    }, [currentPage, itemsPerPage, searchParams.get('page')])
 
     const onPageChange = (page) => {
         setSearchParams({ page: page })
@@ -47,15 +47,16 @@ export const Discovery = () => {
                     <EventCard key={index} event={event} />
                 ))}
             </div>
-            <div className="mb-20 flex gap-3 overflow-x-auto sm:justify-center">
+            <div className="mb-20 flex justify-center gap-3 overflow-x-auto">
                 {location.pathname === '/discovery' && (
                     <Pagination
+                        className="p-4"
                         currentPage={currentPage}
                         totalPages={totalPages}
                         onPageChange={onPageChange}
                         showIcons
-                        previousLabel="Precedente"
-                        nextLabel="Avanti"
+                        previousLabel=""
+                        nextLabel=""
                     />
                 )}
             </div>
