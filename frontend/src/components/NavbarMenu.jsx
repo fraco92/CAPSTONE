@@ -2,6 +2,7 @@ import React from 'react'
 import { Navbar } from 'flowbite-react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../stores/AuthStore'
+import { Dropdown } from 'flowbite-react'
 
 export const NavbarMenu = (props) => {
     const location = useLocation()
@@ -11,15 +12,6 @@ export const NavbarMenu = (props) => {
 
     // Verifica se la posizione corrente è "/login"
     const isLoginPage = location.pathname === '/login'
-
-    const onButtonClick = () => {
-        if (loggedIn) {
-            localStorage.removeItem('user')
-            props.setLoggedIn(false)
-        } else {
-            navigate('/login')
-        }
-    }
 
     return (
         <>
@@ -52,12 +44,22 @@ export const NavbarMenu = (props) => {
                     >
                         Supporto
                     </Link>
-                    {!isLoginPage && authStore.isLoggedIn() && (
-                        <input
+                    {!isLoginPage && !authStore.isLoggedIn() && (
+                        <Link
+                            to="/login"
                             className="cursor-pointer text-black hover:text-red-500"
+                        >
+                            Log in
+                        </Link>
+                    )}
+                    {authStore.isLoggedIn() && (
+                        <input
                             type="button"
-                            onClick={onButtonClick}
-                            value={loggedIn ? 'Log out' : 'Log in'}
+                            className="cursor-pointer text-black hover:text-red-500"
+                            value="Log out"
+                            onClick={() => {
+                                authStore.setToken(undefined)
+                            }}
                         />
                     )}
                 </Navbar.Collapse>

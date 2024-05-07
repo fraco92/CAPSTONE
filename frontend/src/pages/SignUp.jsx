@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Navigate } from 'react-router-dom'
 import { useAuthStore } from '../stores/AuthStore'
 
 export const SignUp = (props) => {
@@ -14,11 +14,16 @@ export const SignUp = (props) => {
     const navigate = useNavigate()
     const authStore = useAuthStore()
 
+    if (authStore.isLoggedIn()) {
+        return <Navigate to="/discovery" />
+    }
+
     const navigateToLogin = () => {
         navigate('/login')
     }
 
-    const onButtonClick = () => {
+    const onButtonClick = (e) => {
+        e.preventDefault()
         setEmailError('')
         setPasswordError('')
 

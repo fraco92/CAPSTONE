@@ -75,7 +75,6 @@ authRouter.post("/verify", async (req, res) => {
 
   try {
     const decoded = jwt.verify(token, JWTSecretKey)
-    console.log(decoded)
     res.status(200).json({status: 'logged in', message: "Token valido", decoded})
   } catch (err) {
     res.status(401).json({status: 'invalid auth', message: "Token non valido"})
@@ -86,9 +85,6 @@ authRouter.post("/verify", async (req, res) => {
 
 authRouter.post("/check", async (req, res) => {
   const { email } = req.body
-
-console.log(req.body);
-
   const user = await dbClient.user.findUnique({where:{email}})
   
   res.status(200).json({

@@ -3,9 +3,10 @@
 ## TO DO:
 
 - [x] Database Setup
-- [ ] Event list
-- [ ] Auth
-- [ ] Request caching
+- [x] Event list
+- [x] Auth
+- [ ] Search Events
+- [ ] Event Favorites
 - [ ] Deploy
 
 ## Resources

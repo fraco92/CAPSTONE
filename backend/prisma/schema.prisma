@@ -8,10 +8,23 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  username String @unique
-  email    String @unique
-  password String
-  name     String
-  surname  String
+  id         String           @id @default(auto()) @map("_id") @db.ObjectId
+  username   String           @unique
+  email      String           @unique
+  password   String
+  name       String
+  surname    String
+  favourites FavouriteEvent[]
+}
+
+model FavouriteEvent {
+  id         String  @id @map("_id") @db.ObjectId
+  eventName  String
+  eventImage String
+  artistName String
+  venueName  String
+  cityName   String
+  eventDate  String
+  User       User?   @relation(fields: [userId], references: [id])
+  userId     String? @db.ObjectId
 }

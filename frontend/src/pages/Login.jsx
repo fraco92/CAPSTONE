@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Navigate } from 'react-router-dom'
 import { useAuthStore } from '../stores/AuthStore'
 
 export const Login = (props) => {
@@ -11,11 +11,16 @@ export const Login = (props) => {
     const navigate = useNavigate()
     const authStore = useAuthStore()
 
+    if (authStore.isLoggedIn()) {
+        return <Navigate to="/discovery" />
+    }
+
     const navigateToSignup = () => {
         navigate('/signup')
     }
 
-    const onButtonClick = () => {
+    const onButtonClick = (e) => {
+        e.preventDefault()
         setEmailError('')
         setPasswordError('')
 
@@ -89,7 +94,7 @@ export const Login = (props) => {
     }
 
     return (
-        <div
+        <form
             className={
                 'mainContainer mt-20 flex flex-col items-center align-middle'
             }
@@ -137,7 +142,7 @@ export const Login = (props) => {
                 className={
                     'inputButton mx-[90px] mt-7 cursor-pointer rounded-full border-0 bg-black px-4 py-[10px] font-medium text-white'
                 }
-                type="button"
+                type="submit"
                 onClick={onButtonClick}
                 value={'Log in'}
             />
@@ -151,6 +156,6 @@ export const Login = (props) => {
                     Iscriviti
                 </a>
             </div>
-        </div>
+        </form>
     )
 }

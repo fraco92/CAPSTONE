@@ -7,7 +7,7 @@ export const useAuthStore = create(
             token: undefined,
             setToken: (token) => set({ token }),
             isLoggedIn: () => {
-                !!get().token
+                return !!get().token
             },
         }),
         { name: 'token-storage' }

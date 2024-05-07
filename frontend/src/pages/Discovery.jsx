@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { EventCard } from '../components/EventCard'
-import { useSearchParams, useLocation } from 'react-router-dom'
+import { useSearchParams, useLocation, Link } from 'react-router-dom'
 import { useEventStore } from '../stores/EventStore'
 import { SearchBar } from '../components/SearchBar'
 import { Pagination } from 'flowbite-react'
@@ -35,9 +35,11 @@ export const Discovery = () => {
     return (
         <>
             <div>
-                <h1 className="mt-10 text-[24pt] font-bold text-black">
-                    I prossimi eventi
-                </h1>
+                {location.pathname === '/discovery' && (
+                    <h1 className="mt-10 text-[24pt] font-bold text-black">
+                        I prossimi eventi
+                    </h1>
+                )}
                 <div className="mt-10">
                     {location.pathname === '/discovery' && <SearchBar />}
                 </div>
@@ -47,6 +49,13 @@ export const Discovery = () => {
                     <EventCard key={index} event={event} />
                 ))}
             </div>
+            {location.pathname === '/' && (
+                <Link to="/discovery">
+                    <button className="border-1 rounded-full border border-black bg-white text-black hover:border-black hover:text-red-500 hover:shadow-sm">
+                        Scopri di più
+                    </button>
+                </Link>
+            )}
             <div className="mb-20 flex justify-center gap-3 overflow-x-auto">
                 {location.pathname === '/discovery' && (
                     <Pagination

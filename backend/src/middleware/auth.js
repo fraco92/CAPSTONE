@@ -1,3 +1,5 @@
+//TODO protect routes with auth middleware that need the user to be authenticated
+
 export function authMiddleware(req, res, next) {
   const tokenHeaderKey = 'jwt-token'
   const { token } = req.headers.get(tokenHeaderKey)
