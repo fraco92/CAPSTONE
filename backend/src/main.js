@@ -23,7 +23,3 @@ server.use("/api", apiRouter)
 server.listen(PORT, () => {
   console.log(`Server started at port http://localhost:${PORT}`);
 })
-
-//Query
-// const users = await prisma.user.findUnique({where: {username: "fraco92", email: "fraco92@gmail.com"}})
-// console.log(users);

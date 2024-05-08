@@ -1,12 +1,9 @@
 import { Router } from "express";
-import { request } from "http";
-import {authMiddleware} from "../middleware/auth.js"
+
 
 const ticketmasterApiToken = process.env.TICKETMASTER_API_KEY
 
 export const eventRouter = Router()
-
-// eventRouter.use(authMiddleware)
 
 //TODO change URL to accept search query parameters
 eventRouter.get("/", async (req, res) => {

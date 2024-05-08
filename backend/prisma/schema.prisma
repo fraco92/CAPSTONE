@@ -18,7 +18,8 @@ model User {
 }
 
 model FavouriteEvent {
-  id         String  @id @map("_id") @db.ObjectId
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  eventId    String  @unique
   eventName  String
   eventImage String
   artistName String

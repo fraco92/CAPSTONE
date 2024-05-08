@@ -1,12 +1,13 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-
 export const useFavouriteStore = create(
     persist(
         (set, get) => ({
             favourites: [],
-            addFavourites: (...favourites) =>
-                set({ favourites: [...get().favourites, ...favourites] }),
+            addFavourite: (favourite) => {
+                set({ favourites: [...get().favourites, favourite] })
+            },
+            setFavourites: (favourites) => set({ favourites }),
             removeFavourite: (favourite) =>
                 set({
                     favourites: get().favourites.filter(

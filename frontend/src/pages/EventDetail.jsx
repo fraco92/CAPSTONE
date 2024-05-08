@@ -2,11 +2,14 @@ import { useParams } from 'react-router-dom'
 import { useEventStore } from '../stores/EventStore'
 import { useState } from 'react'
 import { useFavouriteStore } from '../stores/FavouriteStore.js'
+import { addToFavouriteDb, removeFavouriteFromDb } from '../api/Favourite.js'
+import { useAuthStore } from '../stores/AuthStore.js'
 
 export const EventDetail = () => {
     const eventStore = useEventStore()
     const favouriteStore = useFavouriteStore()
     const { id } = useParams()
+    const authStore = useAuthStore()
 
     const [event, setEvent] = useState(
         eventStore.events.find((event) => event.id === id)
@@ -26,7 +29,19 @@ export const EventDetail = () => {
     const eventTime = event.dates.start.localTime.substring(0, 5)
 
     const handlerClickFavourite = () => {
-        favouriteStore.addFavourites(event)
+        favouriteStore.addFavourite(event)
+        addToFavouriteDb(
+            {
+                eventName,
+                id: event.id,
+                eventImage,
+                artistName,
+                venueName,
+                cityName,
+                eventDate,
+            },
+            authStore.token?.token
+        )
     }
 
     const isInFavourites = (event) => {
@@ -37,6 +52,7 @@ export const EventDetail = () => {
 
     const removeFavourite = (event) => {
         favouriteStore.removeFavourite(event)
+        removeFavouriteFromDb(event.id, authStore.token?.token)
     }
 
     return (

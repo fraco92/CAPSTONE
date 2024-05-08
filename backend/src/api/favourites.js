@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { dbClient } from "../db";
+import { dbClient } from "../db.js";
 import {authMiddleware} from "../middleware/auth.js"
 
 export const favouritesRouter = Router();
@@ -7,12 +7,13 @@ export const favouritesRouter = Router();
 favouritesRouter.use(authMiddleware)
 
 favouritesRouter.get("/", async (req, res) => {
+
   try {
-   const favourites = await dbClient.favouriteEvent.findMany({
+   const favourites = (await dbClient.favouriteEvent.findMany({
       where: {
-         userId: req.user.id
+         userId: req.user.userId
       }      
-   }) 
+   })).map(favourite => ({id: favourite.eventId, artistName: favourite.artistName, cityName: favourite.cityName, eventDate: favourite.eventDate, eventImage: favourite.eventImage, eventName: favourite.eventName, venueName: favourite.venueName})) 
    res.status(200).json(favourites)
   } catch (error) {
       res.status(500).json({
@@ -24,7 +25,7 @@ favouritesRouter.get("/", async (req, res) => {
 
 favouritesRouter.post("/", async (req, res) => {
   try {
-    const userId = req.user.id
+    const userId = req.user.userId
     await dbClient.favouriteEvent.create({
       data: {
         User: {
@@ -37,7 +38,7 @@ favouritesRouter.post("/", async (req, res) => {
         eventDate: req.body.eventDate,
         eventImage: req.body.eventImage,
         eventName: req.body.eventName,
-        id: req.body.id,
+        eventId: req.body.id,
         venueName: req.body.venueName
       }
     })
@@ -45,6 +46,7 @@ favouritesRouter.post("/", async (req, res) => {
       message: "Event added to favourites"
     })
   } catch (error) {
+    console.log(error) 
     res.status(400).json({
       message: "Event already in favourites"
     })
@@ -53,17 +55,18 @@ favouritesRouter.post("/", async (req, res) => {
 
 favouritesRouter.delete("/", async (req, res) => {
   try {
-    const userId = req.user.id
+    const userId = req.user.userId
     await dbClient.favouriteEvent.delete({
       where: {
         userId: userId,
-        id: req.body.id
+        eventId: req.body.id
       }
     })
     res.status(200).json({
       message: "Event removed from favourites"
     })
   } catch (error) {
+    console.log(error)
     res.status(400).json({
       message: "Event not in favourites"
     })

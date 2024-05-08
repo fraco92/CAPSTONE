@@ -12,12 +12,15 @@ import { useAuthStore } from './stores/AuthStore'
 import { Support } from './pages/Support'
 import { About } from './pages/About'
 import { Favourites } from './pages/Favourites'
+import { getFavouritesFromDb } from './api/Favourite'
+import { useFavouriteStore } from './stores/FavouriteStore'
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(false)
     const [email, setEmail] = useState('')
 
     const authStore = useAuthStore()
+    const favouriteStore = useFavouriteStore()
 
     useEffect(() => {
         // Fetch the user email and token from local storage
@@ -45,6 +48,23 @@ function App() {
                 })
         }
     }, [])
+
+    useEffect(() => {
+        // Fetch the user email and token from local storage
+        const user = authStore.token
+        const token = user?.token
+
+        if (user && token) {
+            try {
+                getFavouritesFromDb(token).then((favourites) => {
+                    favouriteStore.setFavourites(favourites)
+                })
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }, [])
+
     return (
         <div className="App">
             <BrowserRouter>

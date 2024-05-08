@@ -32,6 +32,14 @@ export const NavbarMenu = (props) => {
                     >
                         Discovery
                     </Link>
+                    {authStore.isLoggedIn() && (
+                        <Link
+                            to="/favourites"
+                            className="cursor-pointer text-black hover:text-red-500"
+                        >
+                            Eventi preferiti
+                        </Link>
+                    )}
                     <Link
                         to="/about"
                         className="cursor-pointer text-black hover:text-red-500"
