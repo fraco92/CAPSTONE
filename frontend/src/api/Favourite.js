@@ -11,7 +11,6 @@ export const addToFavouriteDb = async (favourite, token) => {
 
 export const getFavouritesFromDb = async (token) => {
     const response = await fetch('http://localhost:3030/api/favourites', {
-        method: 'GET',
         headers: {
             'jwt-token': token,
         },

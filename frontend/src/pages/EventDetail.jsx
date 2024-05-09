@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useFavouriteStore } from '../stores/FavouriteStore.js'
 import { addToFavouriteDb, removeFavouriteFromDb } from '../api/Favourite.js'
 import { useAuthStore } from '../stores/AuthStore.js'
+import { CommentArea } from '../components/comment-area/CommentArea.jsx'
 
 export const EventDetail = () => {
     const eventStore = useEventStore()
@@ -57,7 +58,7 @@ export const EventDetail = () => {
 
     return (
         <>
-            <div className="flex flex-wrap justify-center gap-8 pb-24 pt-10">
+            <div className="flex flex-wrap justify-start gap-8 pb-10 pt-10 md:justify-center">
                 <div className="mx-4">
                     <img
                         className="aspect-square rounded-xl object-cover md:max-w-[280px] lg:max-w-[420px]"
@@ -90,30 +91,35 @@ export const EventDetail = () => {
                             <span>{eventTime}</span>
                         </div>
                     </div>
-                    <div className="button-container cursor-pointer items-center text-xl hover:text-red-600">
-                        {isInFavourites(event) ? (
-                            <button
-                                onClick={() => removeFavourite(event)}
-                                className="border-1 flex flex-row items-center rounded-full border border-black bg-white p-2 text-black hover:border-black hover:text-red-500 hover:shadow-sm"
-                            >
-                                <ion-icon name="heart"></ion-icon>
-                                <span className="ps-2 text-lg font-normal">
-                                    Rimuovi dai preferiti
-                                </span>
-                            </button>
-                        ) : (
-                            <button
-                                onClick={handlerClickFavourite}
-                                className="border-1 flex flex-row items-center rounded-full border border-black bg-white p-2 text-black hover:border-black hover:text-red-500 hover:shadow-sm"
-                            >
-                                <ion-icon name="heart-outline"></ion-icon>
-                                <span className="ps-2 text-lg font-normal">
-                                    Aggiungi ai preferiti
-                                </span>
-                            </button>
-                        )}
-                    </div>
+                    {authStore.isLoggedIn() && (
+                        <div className="button-container cursor-pointer items-center text-xl hover:text-red-600">
+                            {isInFavourites(event) ? (
+                                <button
+                                    onClick={() => removeFavourite(event)}
+                                    className="border-1 flex flex-row items-center rounded-full border border-black bg-white p-2 text-black hover:border-black hover:text-red-500 hover:shadow-sm"
+                                >
+                                    <ion-icon name="heart"></ion-icon>
+                                    <span className="ps-2 text-lg font-normal">
+                                        Rimuovi dai preferiti
+                                    </span>
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={handlerClickFavourite}
+                                    className="border-1 flex flex-row items-center rounded-full border border-black bg-white p-2 text-black hover:border-black hover:text-red-500 hover:shadow-sm"
+                                >
+                                    <ion-icon name="heart-outline"></ion-icon>
+                                    <span className="ps-2 text-lg font-normal">
+                                        Aggiungi ai preferiti
+                                    </span>
+                                </button>
+                            )}
+                        </div>
+                    )}
                 </div>
+            </div>
+            <div className="comment_area mx-8 mb-24 mt-4">
+                <CommentArea event={event} />
             </div>
         </>
     )

@@ -6,17 +6,42 @@ export const useEventStore = create(
         (set, get) => ({
             events: [],
             totalPages: 0,
+            searchKeyword: undefined,
             setEvents: (events) => set({ events }),
-            getEvents: async (page = 0, itemsPerPage = 20) => {
+            getEvents: async (
+                page = 0,
+                itemsPerPage = 20,
+                search = undefined
+            ) => {
+                const state = get()
+
+                if (search) {
+                    Object.assign(state, {
+                        searchKeyword: search,
+                        events: [],
+                        totalPages: 0,
+                    })
+                    set(state)
+                }
+
+                if (search === null && state.searchKeyword !== undefined) {
+                    Object.assign(state, {
+                        searchKeyword: undefined,
+                        page: 0,
+                        events: [],
+                    })
+                    set(state)
+                }
+
                 // How many pages are missing
                 const missingPages = Math.max(
-                    page - Math.ceil(get().events.length / itemsPerPage),
+                    page - Math.ceil(state.events.length / itemsPerPage),
                     0
                 )
 
                 // If there are no missing pages, return the events
                 if (missingPages === 0) {
-                    const events = get().events.slice(
+                    const events = state.events.slice(
                         (page - 1) * itemsPerPage,
                         page * itemsPerPage
                     )
@@ -29,23 +54,21 @@ export const useEventStore = create(
                 try {
                     // fetch needed page
                     const data = await fetch(
-                        `http://localhost:3030/api/events?page=${page}&itemsPerPage=${itemsPerPage}`
+                        `http://localhost:3030/api/events?page=${page}&itemsPerPage=${itemsPerPage}&search=${search || state.searchKeyword || ''}`
                     ).then((res) => res.json())
                     const eventData = data._embedded
-                    set({ totalPages: data.page.totalPages })
+
+                    Object.assign(state, { totalPages: data.page.totalPages })
+                    set(state)
 
                     // If there are more than 1 missing pages, fetch the missing pages
                     if (missingPages > 1) {
-                        get()
-                            .getEvents(page - 1, itemsPerPage)
-                            .then(() => {
-                                set({
-                                    events: [
-                                        ...get().events,
-                                        ...eventData.events,
-                                    ],
-                                })
+                        state.getEvents(page - 1, itemsPerPage).then(() => {
+                            Object.assign(state, {
+                                events: [...state.events, ...eventData.events],
                             })
+                            set(state)
+                        })
 
                         return {
                             status: 'success',
@@ -53,10 +76,11 @@ export const useEventStore = create(
                         }
                     } else {
                         const events = [
-                            ...get().events,
+                            ...state.events,
                             ...eventData.events,
                         ].slice((page - 1) * itemsPerPage, page * itemsPerPage)
-                        set({ events })
+                        Object.assign(state, { events })
+                        set(state)
                         return { status: 'success', data: events }
                     }
                 } catch (e) {

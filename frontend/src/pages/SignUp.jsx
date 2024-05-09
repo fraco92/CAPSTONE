@@ -90,7 +90,6 @@ export const SignUp = (props) => {
         })
             .then((response) => response.json())
             .then((response) => {
-                console.log('response', response)
                 if (response.token) {
                     authStore.setToken({ token: response.token, email })
                 } else {

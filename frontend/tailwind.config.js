@@ -13,6 +13,8 @@ export default {
     },
     plugins: [
         require('@tailwindcss/typography'),
+        require('@tailwindcss/line-clamp'),
+        require('tailwind-scrollbar'),
         require('daisyui'),
         require('flowbite/plugin'),
         flowbite.plugin(),

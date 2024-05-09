@@ -13,18 +13,23 @@ export const Discovery = () => {
     )
     const [itemsPerPage, setItemsPerPage] = useState(10)
     const [city, setCity] = useState('')
-    const { totalPages, getEvents } = useEventStore((state) => ({
-        getEvents: state.getEvents,
-        totalPages: state.totalPages,
-    }))
+
+    const eventStore = useEventStore()
     const location = useLocation()
 
+    useEffect(() => {}, [eventStore.searchKeyword])
+
     useEffect(() => {
-        getEvents(currentPage, itemsPerPage).then((events) => {
+        eventStore.getEvents(currentPage, itemsPerPage).then((events) => {
             if (events.status === 'success') setEvents(events.data)
             else console.error('Error fetching events', events)
         })
-    }, [currentPage, itemsPerPage, searchParams.get('page')])
+    }, [
+        eventStore.searchKeyword,
+        currentPage,
+        itemsPerPage,
+        searchParams.get('page'),
+    ])
 
     const onPageChange = (page) => {
         setSearchParams({ page: page })
@@ -61,7 +66,7 @@ export const Discovery = () => {
                     <Pagination
                         className="p-4"
                         currentPage={currentPage}
-                        totalPages={totalPages}
+                        totalPages={eventStore.totalPages}
                         onPageChange={onPageChange}
                         showIcons
                         previousLabel=""
