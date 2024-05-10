@@ -2,12 +2,12 @@ import { useNavigate } from 'react-router-dom'
 
 export const FavouriteCard = ({ event, removeFavourite }) => {
     const navigateTo = useNavigate()
-    const eventName = event.name
-    const eventImage = event.images[9].url
-    const artistName = event._embedded.attractions[0].name
-    const venueName = event._embedded.venues[0].name
-    const cityName = event._embedded.venues[0].city.name
-    const eventDate = event.dates.start.localDate
+    const eventName = event.eventName || event.name
+    const eventImage = event.eventImage || event.images[9].url
+    const artistName = event.artistName || event._embedded.attractions[0].name
+    const venueName = event.venueName || event._embedded.venues[0].name
+    const cityName = event.cityName || event._embedded.venues[0].city.name
+    const eventDate = event.eventDate || event.dates.start.localDate
     const eventDateFormatted = new Date(eventDate).toLocaleDateString('it-IT', {
         day: 'numeric',
         month: 'long',

@@ -10,20 +10,22 @@ export const AddComment = ({ eventId, onCommentCreated }) => {
         createComment(eventId, comment, authStore.token?.token).then(
             (response) => {
                 onCommentCreated && onCommentCreated(response.data)
+                setComment('')
             }
         )
     }
 
     return (
         <>
-            <div className="flex flex-col items-center">
+            <div className="sticky flex flex-col items-center">
                 <textarea
-                    className="mt-3 rounded-md border p-2"
+                    className="mt-3 rounded-md border p-2 font-thin"
                     name="comment"
                     cols="30"
                     rows="3"
                     onChange={(e) => setComment(e.target.value)}
                     required
+                    value={comment}
                     placeholder="Inserisci il tuo commento"
                 ></textarea>
 

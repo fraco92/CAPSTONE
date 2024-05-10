@@ -26,9 +26,8 @@ export const CommentArea = ({ event }) => {
 
     return (
         <>
-            <div className="inline-flex flex-col items-center p-4 shadow-md">
+            <div className="flex flex-col items-center p-4 shadow-md">
                 <h1 className="mb-8 text-[24pt]">Commenti</h1>
-
                 <CommentList
                     comments={comments}
                     onCommentDelete={onCommentDelete}

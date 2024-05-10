@@ -118,7 +118,7 @@ export const EventDetail = () => {
                     )}
                 </div>
             </div>
-            <div className="comment_area mx-8 mb-24 mt-4">
+            <div className="comment_area mx-8 mb-24 mt-4 font-medium">
                 <CommentArea event={event} />
             </div>
         </>

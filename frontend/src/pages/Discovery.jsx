@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { EventCard } from '../components/EventCard'
 import { useSearchParams, useLocation, Link } from 'react-router-dom'
 import { useEventStore } from '../stores/EventStore'
-import { SearchBar } from '../components/SearchBar'
 import { Pagination } from 'flowbite-react'
 
 export const Discovery = () => {
@@ -12,7 +11,6 @@ export const Discovery = () => {
         parseInt(searchParams.get('page')) || 1
     )
     const [itemsPerPage, setItemsPerPage] = useState(10)
-    const [city, setCity] = useState('')
 
     const eventStore = useEventStore()
     const location = useLocation()
@@ -45,9 +43,6 @@ export const Discovery = () => {
                         I prossimi eventi
                     </h1>
                 )}
-                <div className="mt-10">
-                    {location.pathname === '/discovery' && <SearchBar />}
-                </div>
             </div>
             <div className="mt-10 flex flex-row flex-wrap justify-center gap-4 pb-14">
                 {events?.map((event, index) => (
