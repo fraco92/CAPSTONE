@@ -1,5 +1,7 @@
+import { baseURL } from '.'
+
 export const addToFavouriteDb = async (favourite, token) => {
-    fetch('http://localhost:3030/api/favourites', {
+    fetch(baseURL + '/api/favourites', {
         method: 'POST',
         headers: {
             'jwt-token': token,
@@ -10,7 +12,7 @@ export const addToFavouriteDb = async (favourite, token) => {
 }
 
 export const getFavouritesFromDb = async (token) => {
-    const response = await fetch('http://localhost:3030/api/favourites', {
+    const response = await fetch(baseURL + '/api/favourites', {
         headers: {
             'jwt-token': token,
         },
@@ -19,7 +21,7 @@ export const getFavouritesFromDb = async (token) => {
 }
 
 export const removeFavouriteFromDb = async (id, token) => {
-    fetch('http://localhost:3030/api/favourites', {
+    fetch(baseURL + '/api/favourites', {
         method: 'DELETE',
         headers: {
             'jwt-token': token,
