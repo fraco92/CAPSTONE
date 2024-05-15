@@ -16,7 +16,7 @@ export const FavouriteCard = ({ event, removeFavourite }) => {
 
     return (
         <>
-            <div className="flex w-fit basis-1/5 flex-col items-center gap-28 rounded-2xl border p-4 text-black md:flex-row">
+            <div className="mb-5 flex w-fit basis-1/5 flex-col items-center gap-28 rounded-2xl border p-4 text-black md:flex-row">
                 <div
                     onClick={() => navigateTo(`/details/${event.id}`)}
                     className="flex w-[280px] cursor-pointer flex-col justify-center"

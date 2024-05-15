@@ -110,7 +110,7 @@ export const Support = () => {
                 <input
                     className="inputButton mx-[90px] mt-7 cursor-pointer rounded-full border-0 bg-black px-4 py-[10px] font-medium text-white"
                     type="submit"
-                    value="Send"
+                    value="Invia"
                     disabled={isSubmitting}
                     onClick={sendEmail}
                 />

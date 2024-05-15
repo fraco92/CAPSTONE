@@ -111,7 +111,7 @@ export const Login = (props) => {
                 <input
                     value={email}
                     name="email"
-                    placeholder="Enter your email here"
+                    placeholder="Email"
                     onChange={(ev) => setEmail(ev.target.value)}
                     className={
                         'inputBox h-[38px] w-[280px] rounded-[8px] border border-black bg-white ps-[8px] text-lg'
@@ -127,7 +127,7 @@ export const Login = (props) => {
                     value={password}
                     name="password"
                     type="password"
-                    placeholder="Enter your password here"
+                    placeholder="Password"
                     onChange={(ev) => setPassword(ev.target.value)}
                     className={
                         'inputBox h-[38px] w-[280px] rounded-[8px] border border-black bg-white ps-[8px] text-lg'

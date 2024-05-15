@@ -21,7 +21,7 @@ export const AddComment = ({ eventId, onCommentCreated }) => {
                 <textarea
                     className="mt-3 rounded-md border p-2 font-thin"
                     name="comment"
-                    cols="30"
+                    cols="40"
                     rows="3"
                     onChange={(e) => setComment(e.target.value)}
                     required

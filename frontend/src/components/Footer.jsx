@@ -1,32 +1,39 @@
 export const Footer = () => {
     return (
         <>
-            <footer className="fixed bottom-0 left-0 z-20 h-[40px] w-full border-t border-gray-200 bg-white shadow dark:border-gray-600 dark:bg-gray-800 md:flex md:items-center md:justify-between md:p-6">
+            <footer className="fixed bottom-0 left-0 z-20 flex h-[50px] w-full items-center justify-between border-t border-gray-200 bg-white p-6">
                 <span className="ps-4 text-sm text-gray-500 dark:text-gray-400 sm:text-center">
                     © 2024 PlugInLive. All Rights Reserved.
                 </span>
-                {/* <ul className="mt-3 flex flex-wrap items-center text-sm font-medium text-gray-500 sm:mt-0 dark:text-gray-400">
+                <ul className="mt-3 flex flex-wrap items-center text-base font-medium">
                     <li>
-                        <a href="#" className="me-4 hover:underline md:me-6">
-                            About
+                        <a
+                            target="_blank"
+                            href="https://www.instagram.com/francesco___coco/"
+                            className="me-2 text-gray-500 hover:text-red-500"
+                        >
+                            <ion-icon name="logo-instagram"></ion-icon>
                         </a>
                     </li>
                     <li>
-                        <a href="#" className="me-4 hover:underline md:me-6">
-                            Privacy Policy
+                        <a
+                            target="_blank"
+                            href="https://github.com/fraco92"
+                            className="me-2 text-gray-500 hover:text-red-500"
+                        >
+                            <ion-icon name="logo-github"></ion-icon>
                         </a>
                     </li>
                     <li>
-                        <a href="#" className="me-4 hover:underline md:me-6">
-                            Licensing
+                        <a
+                            target="_blank"
+                            href="https://linkedin.com/in/coco-francesco"
+                            className="me-2 text-gray-500 hover:text-red-500"
+                        >
+                            <ion-icon name="logo-linkedin"></ion-icon>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" className="hover:underline">
-                            Contact
-                        </a>
-                    </li>
-                </ul> */}
+                </ul>
             </footer>
         </>
     )

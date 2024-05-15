@@ -56,6 +56,11 @@ export const EventDetail = () => {
         removeFavouriteFromDb(event.id, authStore.token?.token)
     }
 
+    const shareOnWhatsApp = () => {
+        const shareText = `Ciao! Mi interessa questo evento: ${eventName} in ${venueName}, ${cityName} il ${eventDateFormatted}. Cosa ne pensi? 😉`
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`
+        window.open(whatsappUrl, '_blank')
+    }
     return (
         <>
             <div className="flex flex-wrap justify-start gap-8 pb-10 pt-10 md:justify-center">
@@ -92,7 +97,7 @@ export const EventDetail = () => {
                         </div>
                     </div>
                     {authStore.isLoggedIn() && (
-                        <div className="button-container cursor-pointer items-center text-xl hover:text-red-600">
+                        <div className="button-container flex cursor-pointer items-center gap-3 text-xl hover:text-red-600">
                             {isInFavourites(event) ? (
                                 <button
                                     onClick={() => removeFavourite(event)}
@@ -114,6 +119,15 @@ export const EventDetail = () => {
                                     </span>
                                 </button>
                             )}
+                            <button
+                                onClick={shareOnWhatsApp}
+                                className="border-1 flex flex-row items-center rounded-full border border-black bg-white p-2 text-black hover:border-black hover:text-red-500 hover:shadow-sm"
+                            >
+                                <ion-icon name="logo-whatsapp"></ion-icon>
+                                <span className="ps-2 text-lg font-normal">
+                                    Condividi
+                                </span>
+                            </button>
                         </div>
                     )}
                 </div>

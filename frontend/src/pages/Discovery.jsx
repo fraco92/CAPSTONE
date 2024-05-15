@@ -35,6 +35,10 @@ export const Discovery = () => {
         window.scrollTo(0, 0)
     }
 
+    const scrollToTop = () => {
+        window.scrollTo(0, 0)
+    }
+
     return (
         <>
             <div>
@@ -44,13 +48,13 @@ export const Discovery = () => {
                     </h1>
                 )}
             </div>
-            <div className="mt-10 flex flex-row flex-wrap justify-center gap-4 pb-14">
+            <div className="mt-20 flex flex-row flex-wrap justify-center gap-4 pb-14">
                 {events?.map((event, index) => (
                     <EventCard key={index} event={event} />
                 ))}
             </div>
             {location.pathname === '/' && (
-                <Link to="/discovery">
+                <Link to="/discovery" onClick={scrollToTop}>
                     <button className="border-1 rounded-full border border-black bg-white text-black hover:border-black hover:text-red-500 hover:shadow-sm">
                         Scopri di più
                     </button>
