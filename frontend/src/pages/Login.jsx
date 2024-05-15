@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate, Navigate } from 'react-router-dom'
 import { useAuthStore } from '../stores/AuthStore'
 import { baseURL } from '../api'
+import { useFavouriteStore } from '../stores/FavouriteStore'
+import { getFavouritesFromDb } from '../api/Favourite'
 
 export const Login = (props) => {
     const [email, setEmail] = useState('')
@@ -11,6 +13,7 @@ export const Login = (props) => {
 
     const navigate = useNavigate()
     const authStore = useAuthStore()
+    const favouriteStore = useFavouriteStore()
 
     if (authStore.isLoggedIn()) {
         return <Navigate to="/discovery" />
@@ -87,6 +90,13 @@ export const Login = (props) => {
             .then((response) => {
                 if (response.token) {
                     authStore.setToken({ token: response.token, email })
+                    try {
+                        getFavouritesFromDb(token).then((favourites) => {
+                            favouriteStore.setFavourites(favourites)
+                        })
+                    } catch (error) {
+                        console.log(error)
+                    }
                     navigate('/discovery')
                 } else {
                     window.alert('Email o password errati')
