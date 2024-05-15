@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { baseURL } from '../api'
 
 export const useEventStore = create(
     persist(
@@ -54,7 +55,8 @@ export const useEventStore = create(
                 try {
                     // fetch needed page
                     const data = await fetch(
-                        `http://localhost:3030/api/events?page=${page}&itemsPerPage=${itemsPerPage}&search=${search || state.searchKeyword || ''}`
+                        baseURL +
+                            `/api/events?page=${page}&itemsPerPage=${itemsPerPage}&search=${search || state.searchKeyword || ''}`
                     ).then((res) => res.json())
                     const eventData = data._embedded
 

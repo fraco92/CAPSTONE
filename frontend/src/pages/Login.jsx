@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, Navigate } from 'react-router-dom'
 import { useAuthStore } from '../stores/AuthStore'
+import { baseURL } from '../api'
 
 export const Login = (props) => {
     const [email, setEmail] = useState('')
@@ -61,7 +62,7 @@ export const Login = (props) => {
     }
 
     const checkAccountExists = (callback) => {
-        fetch('http://localhost:3030/api/auth/check', {
+        fetch(baseURL + '/api/auth/check', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -75,7 +76,7 @@ export const Login = (props) => {
     }
 
     const logIn = () => {
-        fetch('http://localhost:3030/api/auth', {
+        fetch(baseURL + '/api/auth', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

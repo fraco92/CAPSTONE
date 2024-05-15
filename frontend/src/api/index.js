@@ -1,2 +1,1 @@
-export const baseURL =
-    import.meta.env.BACKEND_BASE_URL || 'http://localhost:3030'
+export const baseURL = import.meta.env.VITE_BACKEND || 'http://localhost:3030'

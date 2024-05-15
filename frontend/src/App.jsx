@@ -14,6 +14,7 @@ import { About } from './pages/About'
 import { Favourites } from './pages/Favourites'
 import { getFavouritesFromDb } from './api/Favourite'
 import { useFavouriteStore } from './stores/FavouriteStore'
+import { baseURL } from './api'
 
 console.log('env', import.meta.env)
 
@@ -35,7 +36,7 @@ function App() {
             setLoggedIn(false)
         } else {
             // If the token exists, verify it with the auth server to see if it is valid
-            fetch('http://localhost:3030/api/auth/verify', {
+            fetch(baseURL + '/api/auth/verify', {
                 method: 'POST',
                 headers: {
                     'jwt-token': token,
