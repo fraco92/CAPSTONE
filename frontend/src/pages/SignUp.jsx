@@ -97,9 +97,11 @@ export const SignUp = (props) => {
                 if (response.token) {
                     authStore.setToken({ token: response.token, email })
                     try {
-                        getFavouritesFromDb(token).then((favourites) => {
-                            favouriteStore.setFavourites(favourites)
-                        })
+                        getFavouritesFromDb(response.token).then(
+                            (favourites) => {
+                                favouriteStore.setFavourites(favourites)
+                            }
+                        )
                     } catch (error) {
                         console.log(error)
                     }
