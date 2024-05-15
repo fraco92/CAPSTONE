@@ -12,7 +12,6 @@ export const addToFavouriteDb = async (favourite, token) => {
 }
 
 export const getFavouritesFromDb = async (token) => {
-    console.log('baseURL!', baseURL)
     const response = await fetch(baseURL + '/api/favourites', {
         headers: {
             'jwt-token': token,
