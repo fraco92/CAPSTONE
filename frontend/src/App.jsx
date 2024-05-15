@@ -16,8 +16,6 @@ import { getFavouritesFromDb } from './api/Favourite'
 import { useFavouriteStore } from './stores/FavouriteStore'
 import { baseURL } from './api'
 
-console.log('env', import.meta.env)
-
 function App() {
     const [loggedIn, setLoggedIn] = useState(false)
     const [email, setEmail] = useState('')
